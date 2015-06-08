@@ -1,9 +1,13 @@
 class TasksController < ApplicationController
+  before_action :all_tasks, only: [:index, :create, :update, :destroy]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :all_tasks, only: [:index, :create]
+ 
   # GET /tasks
   # GET /tasks.json
 
+  def update
+     @task.update(task_params)
+  end
 
   # GET /tasks/new
   def new
@@ -17,7 +21,11 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = Task.create(task_params)
+  end
+  
+  def destroy
+  @task.destroy
   end
 
   private
